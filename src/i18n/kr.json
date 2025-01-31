@@ -10,7 +10,16 @@
     "rememberMe": "로그인 유지",
     "guest": "게스트로 로그인"
   },
+  "registerPage": {
+    "title": "회원가입",
+    "email": "이메일",
+    "username": "아이디",
+    "password": "비밀번호",
+    "repeatPassword": "비밀번호 확인",
+    "submit": "회원가입"
+  },
   "navBar": {
-    "login": "로그인"
+    "login": "로그인",
+    "register": "회원가입"
   }
 }

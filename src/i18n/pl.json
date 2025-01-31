@@ -10,7 +10,16 @@
     "rememberMe": "Zapamiętaj mnie",
     "guest": "Zaloguj się jako gość"
   },
+  "registerPage": {
+    "title": "Zarejestruj się",
+    "email": "Email",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "repeatPassword": "Powtórz hasło",
+    "submit": "Zarejestruj się"
+  },
   "navBar": {
-    "login": "Zaloguj się"
+    "login": "Zaloguj się",
+    "register": "Zarejestruj się"
   }
 }

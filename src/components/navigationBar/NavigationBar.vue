@@ -20,6 +20,7 @@ const navItems = computed(() => [
 
 const entryNavItems = computed(() => [
   { title: t('navBar.login'), icon: 'mdi-login', to: '/login' },
+  { title: t('navBar.register'), icon: 'mdi-account-plus', to: '/register' },
 ]);
 </script>
 

@@ -10,7 +10,16 @@
     "rememberMe": "Remember me",
     "guest": "Login as guest"
   },
+  "registerPage": {
+    "title": "Sign up",
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "repeatPassword": "Repeat password",
+    "submit": "Sign up"
+  },
   "navBar": {
-    "login": "Login"
+    "login": "Login",
+    "register": "Sign up"
   }
 }
