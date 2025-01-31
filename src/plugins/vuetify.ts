@@ -8,30 +8,29 @@ const vuetify = createVuetify({
   components,
   directives,
   theme: {
-    defaultTheme: 'light',
+    defaultTheme: 'dark',
     themes: {
       light: {
         colors: {
-          primary: '#1976d2',
-          secondary: '#64b5f6',
-          error: '#e57373',
-          warning: '#ffa000',
-          info: '#1a237e',
-          success: '#388e3c',
-          surface: '#eeeeee',
-          overlay: '#fafafa',
+          primary: '#b8860b', // lewy sidebar
+          secondary: '#cdaa7d', // Light brown
+          error: '#ff4500', // error (czerwony)
+          warning: '#ffcc00', // komunikaty ostrzegawcze (żółty)
+          info: '#7f9c6a', // komunikaty informacyjne (niebieski)
+          success: '#4e8c4a', // komunikaty sukcesu
+          overlay: '#eee7cb', // tlo dla dialogów np login
+          background: '#f5f5dc', // tło
         },
       },
       dark: {
         colors: {
-          primary: '#0c3690',
-          secondary: '#0865c1',
-          error: '#e57373',
-          warning: '#ffa000',
-          info: '#0d47a1',
-          success: '#388e3c',
-          surface: '#202020',
-          overlay: '#404040',
+          primary: '#8b4513',
+          secondary: '#a0522d',
+          error: '#ff6347',
+          warning: '#ff8c00',
+          info: '#556b2f',
+          success: '#228b22',
+          overlay: '#3e2a12',
         },
       },
     },
