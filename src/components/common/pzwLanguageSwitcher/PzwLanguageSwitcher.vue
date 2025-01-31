@@ -9,7 +9,7 @@ import { Language } from '@/types/i18n.model';
 import { getLanguage, saveLanguage } from '@/utils/language.utils';
 import i18n from '@/plugins/i18n';
 import { computed, ref } from 'vue';
-import PzwDropdownMenu from '../pzwDropdownMenu.vue/PzwDropdownMenu.vue';
+import PzwDropdownMenu from '../pzwDropdownMenu/PzwDropdownMenu.vue';
 
 const activeLanguage = ref<Language>(getLanguage());
 
