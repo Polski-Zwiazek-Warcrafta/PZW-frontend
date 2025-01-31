@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import PzwButton from '../common/pzwButton/PzwButton.vue';
+import { t } from '@/plugins/i18n';
 
 const isDrawerOpen = ref(true);
 const isHoveringDrawer = ref(false);
@@ -15,6 +16,10 @@ const onMouseLeave = () => (isHoveringDrawer.value = false);
 const navItems = computed(() => [
   { title: 'Home', icon: 'mdi-home', to: '/' },
   { title: 'Profile', icon: 'mdi-account', to: '/profile' },
+]);
+
+const entryNavItems = computed(() => [
+  { title: t('navBar.login'), icon: 'mdi-login', to: '/login' },
 ]);
 </script>
 
@@ -39,6 +44,22 @@ const navItems = computed(() => [
       </v-list-item>
     </v-list>
 
+    <template #append>
+      <v-list class="mb-5">
+        <v-list-item
+          v-for="(item, index) in entryNavItems"
+          :key="index"
+          :to="item.to"
+        >
+          <template #prepend>
+            <v-icon>{{ item.icon }}</v-icon>
+          </template>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </template>
     <PzwButton
       class="toggle-button"
       :icon="isDrawerOpen ? 'mdi-chevron-left' : 'mdi-chevron-right'"

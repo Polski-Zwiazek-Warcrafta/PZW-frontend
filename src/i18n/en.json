@@ -1,5 +1,16 @@
 {
   "mainPage": {
     "text": "Hello world!"
+  },
+  "loginPage": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Login",
+    "rememberMe": "Remember me",
+    "guest": "Login as guest"
+  },
+  "navBar": {
+    "login": "Login"
   }
 }
