@@ -21,5 +21,14 @@
   "navBar": {
     "login": "Zaloguj się",
     "register": "Zarejestruj się"
+  },
+  "error": {
+    "missingFields": "Nie wszystkie pola zostały uzupełnione!",
+    "passwordsNotMatch": "Hasła nie są takie same!",
+    "userExists": "Użytkownik o podanej nazwie już istnieje!",
+    "invalidPassword": "Hasło musi zawierać co najmniej 8 znaków, w tym jedną cyfrę, jedną dużą literę i jedną małą literę!"
+  },
+  "success": {
+    "userCreated": "Użytkownik został utworzony!"
   }
 }

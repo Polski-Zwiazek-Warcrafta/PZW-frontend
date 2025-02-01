@@ -21,5 +21,14 @@
   "navBar": {
     "login": "Login",
     "register": "Sign up"
+  },
+  "error": {
+    "missingFields": "Not all fields have been filled!",
+    "passwordsNotMatch": "Passwords do not match!",
+    "userExists": "User with this name already exists!",
+    "invalidPassword": "Password must contain at least 8 characters, including one digit, one uppercase letter and one lowercase letter!"
+  },
+  "success": {
+    "userCreated": "User has been created!"
   }
 }
