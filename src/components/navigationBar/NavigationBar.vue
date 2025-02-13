@@ -2,9 +2,14 @@
 import { ref, computed } from 'vue';
 import PzwButton from '../common/pzwButton/PzwButton.vue';
 import { t } from '@/plugins/i18n';
+import RegisterPage from '@/pages/entry/registerPage.vue';
+import LoginPage from '@/pages/entry/loginPage.vue';
 
 const isDrawerOpen = ref(true);
 const isHoveringDrawer = ref(false);
+
+const registerDialogModel = ref(false);
+const loginDialogModel = ref(false);
 
 const toggleDrawer = () => {
   isDrawerOpen.value = !isDrawerOpen.value;
@@ -19,8 +24,20 @@ const navItems = computed(() => [
 ]);
 
 const entryNavItems = computed(() => [
-  { title: t('navBar.login'), icon: 'mdi-login', to: '/login' },
-  { title: t('navBar.register'), icon: 'mdi-account-plus', to: '/register' },
+  {
+    title: t('navBar.login'),
+    icon: 'mdi-login',
+    asyncAction: () => {
+      loginDialogModel.value = true;
+    },
+  },
+  {
+    title: t('navBar.register'),
+    icon: 'mdi-account-plus',
+    asyncAction: () => {
+      registerDialogModel.value = true;
+    },
+  },
 ]);
 </script>
 
@@ -39,9 +56,7 @@ const entryNavItems = computed(() => [
         <template #prepend>
           <v-icon>{{ item.icon }}</v-icon>
         </template>
-        <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item-content>
+        <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>
     </v-list>
 
@@ -50,14 +65,12 @@ const entryNavItems = computed(() => [
         <v-list-item
           v-for="(item, index) in entryNavItems"
           :key="index"
-          :to="item.to"
+          @click="item.asyncAction"
         >
           <template #prepend>
             <v-icon>{{ item.icon }}</v-icon>
           </template>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </template>
@@ -69,6 +82,8 @@ const entryNavItems = computed(() => [
       rounded="full"
       @mouseover.stop
     />
+    <RegisterPage v-model="registerDialogModel" />
+    <LoginPage v-model="loginDialogModel" />
   </v-navigation-drawer>
 </template>
 
