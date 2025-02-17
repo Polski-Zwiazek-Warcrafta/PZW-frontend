@@ -20,7 +20,8 @@
   },
   "navBar": {
     "login": "Zaloguj się",
-    "register": "Zarejestruj się"
+    "register": "Zarejestruj się",
+    "logout": "Wyloguj się"
   },
   "error": {
     "missingFields": "Nie wszystkie pola zostały uzupełnione!",

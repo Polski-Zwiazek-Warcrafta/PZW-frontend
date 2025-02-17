@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import PzwButton from '@/components/common/pzwButton/PzwButton.vue';
 import { t } from '@/plugins/i18n';
+import { loginUser } from '@/services/auth.service';
+import { AuthResponse } from '@/types/auth.model';
+import {
+  saveUserInfoToLocalStorage,
+  saveUserInfoToSessionStorage,
+} from '@/utils/auth.utils';
 import { ref, computed } from 'vue';
 
 const props = defineProps<{ modelValue: boolean }>();
@@ -20,15 +26,34 @@ const doClose = () => {
 const username = ref('');
 const password = ref('');
 const rememberMe = ref(false);
+const isLoading = ref(false);
+const errorMessage = ref('');
 
-const login = () => {
-  console.log(
-    'Logging in with:',
-    username.value,
-    password.value,
-    rememberMe.value
-  );
-  model.value = false;
+const login = async () => {
+  isLoading.value = true;
+  const data = {
+    username: username.value,
+    password: password.value,
+  };
+
+  const response: AuthResponse = await loginUser(data);
+
+  if (response.error) {
+    errorMessage.value = t(response.error);
+    isLoading.value = false;
+    return;
+  }
+
+  if (response.success) {
+    if (rememberMe.value) {
+      saveUserInfoToLocalStorage(response.access_token, response.isAdmin);
+    } else {
+      saveUserInfoToSessionStorage(response.access_token, response.isAdmin);
+    }
+
+    isLoading.value = false;
+    model.value = false;
+  }
 };
 </script>
 
@@ -77,11 +102,19 @@ const login = () => {
               theme="light"
               :label="t('loginPage.rememberMe')"
             ></v-checkbox>
+
+            <p v-if="errorMessage" class="error-text">{{ errorMessage }}</p>
           </v-form>
         </v-card-text>
 
         <v-card-actions>
-          <PzwButton block color="primary" variant="flat" @click="login">
+          <PzwButton
+            block
+            color="primary"
+            variant="flat"
+            @click="login"
+            :loading="isLoading"
+          >
             {{ t('loginPage.submit') }}
           </PzwButton>
         </v-card-actions>
@@ -91,6 +124,11 @@ const login = () => {
 </template>
 
 <style>
+.error-text {
+  color: rgb(var(--v-theme-error));
+  text-align: center;
+}
+
 .close-button {
   position: absolute !important;
   top: 0;

@@ -4,6 +4,15 @@ import PzwButton from '../common/pzwButton/PzwButton.vue';
 import { t } from '@/plugins/i18n';
 import RegisterPage from '@/pages/entry/registerPage.vue';
 import LoginPage from '@/pages/entry/loginPage.vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+const isAuthenticated = computed(() => store.getters.isAuthenticated);
+const isAdmin = computed(() => store.getters.isAdmin);
+
+const logout = () => {
+  store.dispatch('logoutUser');
+};
 
 const isDrawerOpen = ref(true);
 const isHoveringDrawer = ref(false);
@@ -21,6 +30,12 @@ const onMouseLeave = () => (isHoveringDrawer.value = false);
 const navItems = computed(() => [
   { title: 'Home', icon: 'mdi-home', to: '/' },
   { title: 'Profile', icon: 'mdi-account', to: '/profile' },
+  {
+    title: 'Users',
+    icon: 'mdi-account-group',
+    to: '/users',
+    hide: !isAdmin.value,
+  },
 ]);
 
 const entryNavItems = computed(() => [
@@ -30,6 +45,7 @@ const entryNavItems = computed(() => [
     asyncAction: () => {
       loginDialogModel.value = true;
     },
+    hide: isAuthenticated.value,
   },
   {
     title: t('navBar.register'),
@@ -37,6 +53,13 @@ const entryNavItems = computed(() => [
     asyncAction: () => {
       registerDialogModel.value = true;
     },
+    hide: isAuthenticated.value,
+  },
+  {
+    title: t('navBar.logout'),
+    icon: 'mdi-logout',
+    asyncAction: logout,
+    hide: !isAuthenticated.value,
   },
 ]);
 </script>
@@ -52,26 +75,26 @@ const entryNavItems = computed(() => [
     @mouseleave="onMouseLeave"
   >
     <v-list class="mt-10">
-      <v-list-item v-for="(item, index) in navItems" :key="index" :to="item.to">
-        <template #prepend>
-          <v-icon>{{ item.icon }}</v-icon>
-        </template>
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
-      </v-list-item>
-    </v-list>
-
-    <template #append>
-      <v-list class="mb-5">
-        <v-list-item
-          v-for="(item, index) in entryNavItems"
-          :key="index"
-          @click="item.asyncAction"
-        >
+      <template v-for="(item, index) in navItems" :key="index">
+        <v-list-item v-if="!item.hide" :to="item.to">
           <template #prepend>
             <v-icon>{{ item.icon }}</v-icon>
           </template>
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
+      </template>
+    </v-list>
+
+    <template #append>
+      <v-list class="mb-5">
+        <template v-for="(item, index) in entryNavItems" :key="index">
+          <v-list-item v-if="!item.hide" @click="item.asyncAction">
+            <template #prepend>
+              <v-icon>{{ item.icon }}</v-icon>
+            </template>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </template>
       </v-list>
     </template>
     <PzwButton
@@ -82,6 +105,7 @@ const entryNavItems = computed(() => [
       rounded="full"
       @mouseover.stop
     />
+
     <RegisterPage v-model="registerDialogModel" />
     <LoginPage v-model="loginDialogModel" />
   </v-navigation-drawer>

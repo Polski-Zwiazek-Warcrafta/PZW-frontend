@@ -20,7 +20,8 @@
   },
   "navBar": {
     "login": "로그인",
-    "register": "회원가입"
+    "register": "회원가입",
+    "logout": "로그아웃"
   },
   "error": {
     "missingFields": "모든 필드를 입력해 주세요!",

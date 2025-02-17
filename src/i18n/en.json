@@ -20,7 +20,8 @@
   },
   "navBar": {
     "login": "Login",
-    "register": "Sign up"
+    "register": "Sign up",
+    "logout": "Logout"
   },
   "error": {
     "missingFields": "Not all fields have been filled!",
