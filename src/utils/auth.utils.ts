@@ -17,7 +17,13 @@ export const saveUserInfoToSessionStorage = (
 };
 
 export const getUserInfo = (): { token: string; isAdmin: boolean } | null => {
+  if (store.state.token && store.state.isAdmin) {
+    return { token: store.state.token, isAdmin: store.state.isAdmin };
+  }
+
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
+
   if (!user) return null;
+
   return JSON.parse(user);
 };

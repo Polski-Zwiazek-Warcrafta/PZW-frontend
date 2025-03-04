@@ -3,7 +3,6 @@ import PzwButton from '@/components/common/pzwButton/PzwButton.vue';
 import { t } from '@/plugins/i18n';
 import { createUser } from '@/services/auth.service';
 import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
 
 const props = defineProps<{
   modelValue: boolean;
@@ -22,10 +21,7 @@ const doClose = () => {
   model.value = false;
 };
 
-const router = useRouter();
-
 const username = ref('');
-const password = ref('');
 const repeatPassword = ref('');
 const errorMessage = ref('');
 
@@ -47,7 +43,6 @@ const register = async () => {
 
   if (response.success) {
     model.value = false;
-    router.push({ name: '/' });
   }
 };
 </script>
